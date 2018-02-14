@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.4.14
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2018. Feb 06. 19:18
--- Kiszolgáló verziója: 10.1.13-MariaDB
--- PHP verzió: 5.6.23
+-- Létrehozás ideje: 2018. Feb 14. 19:34
+-- Kiszolgáló verziója: 5.6.26
+-- PHP verzió: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Tábla szerkezet ehhez a táblához `beszall`
 --
 
-CREATE TABLE `beszall` (
+CREATE TABLE IF NOT EXISTS `beszall` (
   `b_id` int(11) NOT NULL,
   `b_nev` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -37,7 +37,7 @@ CREATE TABLE `beszall` (
 -- Tábla szerkezet ehhez a táblához `jarat`
 --
 
-CREATE TABLE `jarat` (
+CREATE TABLE IF NOT EXISTS `jarat` (
   `id` int(11) NOT NULL,
   `jarat_nev_egy` varchar(250) NOT NULL,
   `jarat_nev_ketto` varchar(250) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `jarat` (
 -- Tábla szerkezet ehhez a táblához `kiszall`
 --
 
-CREATE TABLE `kiszall` (
+CREATE TABLE IF NOT EXISTS `kiszall` (
   `sz_id` int(11) NOT NULL,
   `sz_nev` varchar(250) NOT NULL,
   `sz_munka` varchar(250) NOT NULL
@@ -65,12 +65,12 @@ CREATE TABLE `kiszall` (
 -- Tábla szerkezet ehhez a táblához `news`
 --
 
-CREATE TABLE `news` (
+CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL,
   `title` varchar(128) NOT NULL,
   `slug` varchar(128) NOT NULL,
   `text` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- A tábla adatainak kiíratása `news`
@@ -87,20 +87,20 @@ INSERT INTO `news` (`id`, `title`, `slug`, `text`) VALUES
 -- Tábla szerkezet ehhez a táblához `rkk_users`
 --
 
-CREATE TABLE `rkk_users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `rkk_users` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(120) NOT NULL,
   `user_pass` varchar(255) NOT NULL,
   `user_perm` int(2) NOT NULL DEFAULT '5'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=667 DEFAULT CHARSET=utf8;
 
 --
 -- A tábla adatainak kiíratása `rkk_users`
 --
 
-INSERT INTO `rkk_users` (`id`, `user_id`, `user_name`, `user_pass`, `user_perm`) VALUES
-(1, 666, 'fakanal', '$2y$10$9/gwxBDNmRLVZTLNmA8qauNeQ0N7MkYR7kYVMTifox2OYduPmI3CO', 2);
+INSERT INTO `rkk_users` (`user_id`, `user_name`, `user_pass`, `user_perm`) VALUES
+(2, 'miki', '$2y$10$xHmZQbltk8HvYqkJ8YxapOh0SfcmAKExYyhh8XJiagCHBS4ehey/.', 2),
+(666, 'fakanal', '$2y$10$9/gwxBDNmRLVZTLNmA8qauNeQ0N7MkYR7kYVMTifox2OYduPmI3CO', 2);
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ INSERT INTO `rkk_users` (`id`, `user_id`, `user_name`, `user_pass`, `user_perm`)
 -- Tábla szerkezet ehhez a táblához `ujsag`
 --
 
-CREATE TABLE `ujsag` (
+CREATE TABLE IF NOT EXISTS `ujsag` (
   `id` int(11) NOT NULL,
   `beszalito` varchar(250) NOT NULL,
   `kiadvany` varchar(250) NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE `ujsag` (
 -- Tábla szerkezet ehhez a táblához `ujsag_jarat`
 --
 
-CREATE TABLE `ujsag_jarat` (
+CREATE TABLE IF NOT EXISTS `ujsag_jarat` (
   `id` int(11) NOT NULL,
   `u_id` int(11) NOT NULL,
   `j_id` int(11) NOT NULL
@@ -164,7 +164,7 @@ ALTER TABLE `news`
 -- A tábla indexei `rkk_users`
 --
 ALTER TABLE `rkk_users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- A tábla indexei `ujsag`
@@ -201,12 +201,12 @@ ALTER TABLE `kiszall`
 -- AUTO_INCREMENT a táblához `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT a táblához `rkk_users`
 --
 ALTER TABLE `rkk_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=667;
 --
 -- AUTO_INCREMENT a táblához `ujsag`
 --
