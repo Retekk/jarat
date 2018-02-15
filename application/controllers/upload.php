@@ -38,27 +38,51 @@ class Upload extends CI_Controller {
       $totalrows=$objPHPExcel->setActiveSheetIndex(0)->getHighestRow();   //Count Numbe of rows avalable in excel      	 
       $objWorksheet=$objPHPExcel->setActiveSheetIndex(0);                
       //loop from first data untill last data
-      $ujsagok = array();
-      $u_index = 0;
-      $pre_ujsag = '';
+      $palya = "";
+      $beszallito = "GMPMGM";
       for($i=2;$i<=$totalrows;$i++)
       {
-        $UjsagNev= $objWorksheet->getCellByColumnAndRow(0,$i)->getValue();
-        $Terjeszt= $objWorksheet->getCellByColumnAndRow(1,$i)->getValue();
-        $Email= $objWorksheet->getCellByColumnAndRow(2,$i)->getValue();
-        $Mobile=$objWorksheet->getCellByColumnAndRow(3,$i)->getValue();
+        if($palya != $objWorksheet->getCellByColumnAndRow(0,$i)->getValue()) {
+          $palya = $objWorksheet->getCellByColumnAndRow(0,$i)->getValue();
+          $this->db->select('id');
+          $this->db->from('jarat');
+          $this->db->where('jarat_nev_egy', $palya);
+          $this->db->or_where('jarat_nev_ketto', $palya);
+          $this->db->limit(1); 
+          $query = $this->db->get();
+          foreach ($query->result() as $row)
+          {
+                  $palya_id = $row->id;
+          }
+        }
+        $kiadvany = $objWorksheet->getCellByColumnAndRow(2,$i)->getValue();
+        $gyujto = $objWorksheet->getCellByColumnAndRow(3,$i)->getValue();
+        $telj_kez_elo = $objWorksheet->getCellByColumnAndRow(4,$i)->getValue();
+        $telj_kez = PHPExcel_Style_NumberFormat::toFormattedString($telj_kez_elo, 'YYYY-MM-DD');
+        $telj_veg_elo = $objWorksheet->getCellByColumnAndRow(5,$i)->getValue();
+        $telj_veg = PHPExcel_Style_NumberFormat::toFormattedString($telj_veg_elo, 'YYYY-MM-DD');
+        $suly = $objWorksheet->getCellByColumnAndRow(6,$i)->getValue();
+        $darab = $objWorksheet->getCellByColumnAndRow(7,$i)->getValue();
         
-        echo $UjsagNev;
-        /*
-        $Address=$objWorksheet->getCellByColumnAndRow(4,$i)->getValue();
-        $data_user=array('FirstName'=>$FirstName, 'LastName'=>$LastName ,'Email'=>$Email ,'Mobile'=>$Mobile , 'Address'=>$Address);
-        $this->excel_data_insert_model->Add_User($data_user);*/
-          			  
+        $ujsag_data = array(
+          'beszalito' => $beszallito,
+          'kiadvany' => $kiadvany,
+          'gyujto' => $gyujto,
+          'telj_kezd' => $telj_kez,
+          'telj_veg' => $telj_veg,
+          'suly' => $suly
+        );
+        $this->db->insert('ujsag', $ujsag_data);
+        $ujsag_insert_id = $this->db->insert_id();
+        
+        $kapcs_data = array(
+          'u_id' => $palya_id,  
+          'j_id' => $ujsag_insert_id,
+          'db' => $darab
+        );
+        $this->db->insert('ujsag_jarat', $kapcs_data);
       }
-      unlink('././assets/uploads/excel/'.$file_name); //File Deleted After uploading in database .			 
-      //redirect(base_url() . "index.php/success_upload");
-    
-    
+      //unlink('././assets/uploads/excel/'.$file_name); //File Deleted After uploading in database .	
   }
   
   private function _check_session() {
