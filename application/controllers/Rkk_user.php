@@ -17,6 +17,7 @@ class Rkk_user extends CI_Controller{
         
         $data['_view'] = 'rkk_user/index';
 		$this->load->view('templates/head');
+		$this->load->view('templates/menu');
         $this->load->view('rkk_user/index',$data);
 		$this->load->view('templates/foot');
     }
@@ -45,6 +46,7 @@ class Rkk_user extends CI_Controller{
         {            
             $data['_view'] = 'rkk_user/add';
             $this->load->view('templates/head');
+			$this->load->view('templates/menu');
 			$this->load->view('rkk_user/add',$data);
 			$this->load->view('templates/foot');
         }
@@ -79,6 +81,7 @@ class Rkk_user extends CI_Controller{
             {
                 $data['_view'] = 'rkk_user/edit';
                 $this->load->view('templates/head');
+				$this->load->view('templates/menu');
 				$this->load->view('rkk_user/edit',$data);
 				$this->load->view('templates/foot');
             }

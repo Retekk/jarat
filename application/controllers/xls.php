@@ -9,6 +9,7 @@ class Xls extends CI_Controller {
   
   public function index() {
     $this->load->view('templates/head');
+	$this->load->view('templates/menu');
     $this->load->view('xls_site');
     $this->load->view('templates/foot');
   }
@@ -26,6 +27,7 @@ class Xls extends CI_Controller {
       $file = $this->input->post('xls');
       
       $this->load->view('templates/head');
+	  $this->load->view('templates/menu');
       $this->load->view('success_upload');
       $this->load->view('templates/foot');
       

@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
   
   public function index() {
     $this->load->view('templates/head');
+	$this->load->view('templates/menu');
     $this->load->view('admin_site');
     $this->load->view('templates/foot');
   }
