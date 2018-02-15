@@ -1,15 +1,15 @@
 <?php echo form_open('rkk_user/add'); ?>
 
 	<div>
-		User Name : 
+		Név: 
 		<input type="text" name="user_name" value="<?php echo $this->input->post('user_name'); ?>" />
 	</div>
 	<div>
-		User Pass : 
+		Jelszó: 
 		<input type="text" name="user_pass" value="<?php echo $this->input->post('user_pass'); ?>" />
 	</div>
 	<div>
-		User Perm : 
+		Jogosultság: 
 		<input type="text" name="user_perm" value="<?php echo $this->input->post('user_perm'); ?>" />
 		<span class="text-danger"><?php echo form_error('user_perm');?></span>
 	</div>

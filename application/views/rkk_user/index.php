@@ -1,13 +1,11 @@
-<table border="1" width="100%">
+<table class="table table-bordered table-striped">
     <tr>
-		<th>Id</th>
 		<th>Név</th>
 		<th>Jogosultság</th>
 		<th>Műveletek</th>
     </tr>
 	<?php foreach($rkk_users as $r){ ?>
     <tr>
-		<td><?php echo $r['user_id']; ?></td>
 		<td><?php echo $r['user_name']; ?></td>
 		<td><?php echo $r['user_perm']; ?></td>
 		<td>
@@ -17,3 +15,4 @@
     </tr>
 	<?php } ?>
 </table>
+<a href="<?php echo site_url('rkk_user/add'); ?>" class="btn btn-primary">Új felhasználó</a>
