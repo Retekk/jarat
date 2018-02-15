@@ -62,3 +62,53 @@ fieldset{
 	border: none;
 	background-image: none;
 }
+
+#logo-container{
+	background-color: #282a3c;
+}
+
+.logo{
+	height: 40px; /*amíg nincs logo*/
+}
+
+#header-menu-container{
+	background-color: #fff;
+}
+
+#main-menu-container{
+	background-color: #2c2e3e;
+	padding: 0;
+}
+
+.menu{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#header-menu-container .menu{
+	text-align: right;
+}
+
+#header-menu-container .menu li>a{
+	display: inline-block;
+	padding: 10px;
+}
+
+#main-menu-container .menu{
+	margin-top: 10px;
+}
+#main-menu-container .menu li>a{
+	display: inline-block;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	color: #868aa8;
+}
+
+#main-menu-container .menu li a:hover{
+	text-decoration: none;
+	background-color: #292b3a;
+	color: #868aa8;
+}
