@@ -14,6 +14,10 @@
         <script src="<?php echo $file; ?>"></script>
     <?php 
       endforeach; 
+    } else {
+    ?>
+      <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <?php
     }
     ?>
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />

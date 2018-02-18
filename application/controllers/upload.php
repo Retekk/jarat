@@ -39,7 +39,7 @@ class Upload extends CI_Controller {
       $objWorksheet=$objPHPExcel->setActiveSheetIndex(0);                
       //loop from first data untill last data
       $palya = "";
-      $beszallito = "GMPMGM";
+      $beszallito = $this->input->post('beszall');
       for($i=2;$i<=$totalrows;$i++)
       {
         if($palya != $objWorksheet->getCellByColumnAndRow(0,$i)->getValue()) {
