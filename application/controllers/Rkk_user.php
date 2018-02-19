@@ -35,7 +35,8 @@ class Rkk_user extends CI_Controller{
         {   
             $params = array(
 				'user_name' => $this->input->post('user_name'),
-				'user_pass' => $this->input->post('user_pass'),
+				'user_pass' => password_hash($this->input->post('user_pass'), PASSWORD_BCRYPT),
+				'user_email' => $this->input->post('user_email'),
 				'user_perm' => $this->input->post('user_perm'),
             );
             
@@ -70,7 +71,7 @@ class Rkk_user extends CI_Controller{
             {   
                 $params = array(
 					'user_name' => $this->input->post('user_name'),
-					'user_pass' => $this->input->post('user_pass'),
+					'user_email' => $this->input->post('user_email'),
 					'user_perm' => $this->input->post('user_perm'),
                 );
 

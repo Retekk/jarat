@@ -18,7 +18,7 @@
 					</div>
 				</fieldset>
 				<div>
-				 <button class="btn btn-primary btn-lg" type="submit" class="btn btn-default">Belépés</button>
+				 <button class="btn btn-primary btn-lg" type="submit">Belépés</button>
 				</div>
 			</form>
 		</div>
