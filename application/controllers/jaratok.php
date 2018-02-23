@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class beszall extends CI_Controller {
+class jaratok extends CI_Controller {
   
   public function __construct() {
     parent::__construct();
@@ -12,13 +12,16 @@ class beszall extends CI_Controller {
   
   public function index() {
     $crud = new grocery_CRUD();
-    $crud->set_table('beszall');
-    $crud->columns('b_nev')->display_as('b_nev','Név');
+    $crud->set_table('jarat');
+    $crud->columns('jarat_nev_egy','jarat_nev_ketto','kerulet')
+            ->display_as('jarat_nev_egy','Járatnév 1')
+            ->display_as('jarat_nev_ketto','Járatnév 2')
+            ->display_as('kerulet','Kerület');
     $output = $crud->render();
     
     $this->load->view('templates/head', $output);
     $this->load->view('templates/menu');
-    $this->load->view('beszallitok', $output);
+    $this->load->view('jaratok-site', $output);
     $this->load->view('templates/foot');
   }
   
