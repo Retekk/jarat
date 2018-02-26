@@ -24,6 +24,7 @@ class Login extends CI_Controller {
       
       if($this->_resolve_user_login($user_post, $pass_post)) {
         $user_ID = $this->_get_user_ID_from_username($user_post);
+		$this->_store_login_date($user_ID);
         $ip_address = $this->input->ip_address();
         
         $create_session = array(
@@ -59,6 +60,12 @@ class Login extends CI_Controller {
   
   private function _verify_password_hash($pass, $hash) {
     return password_verify($pass, $hash);
+  }
+  
+  private function _store_login_date($user_ID){
+	  $this->db->set('last_login', date("Y-m-d H:i:s"));
+	  $this->db->where('user_id', $user_ID);
+	  $this->db->update('rkk_users');
   }
   
   private function _check_session() {
