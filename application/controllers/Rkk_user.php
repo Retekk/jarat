@@ -5,6 +5,7 @@ class Rkk_user extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('Rkk_user_model');
+		$this->load->model('User_perm_model');
 		$this->_check_session();
     } 
 
@@ -14,7 +15,7 @@ class Rkk_user extends CI_Controller{
     function index()
     {
         $data['rkk_users'] = $this->Rkk_user_model->get_all_rkk_users();
-        
+		       
         $data['_view'] = 'rkk_user/index';
 		$this->load->view('templates/head');
 		$this->load->view('templates/menu');
@@ -37,7 +38,7 @@ class Rkk_user extends CI_Controller{
 				'user_name' => $this->input->post('user_name'),
 				'user_pass' => password_hash($this->input->post('user_pass'), PASSWORD_BCRYPT),
 				'user_email' => $this->input->post('user_email'),
-				'user_perm' => $this->input->post('user_perm'),
+				'fk_user_perm' => $this->input->post('user_perm'),
             );
             
             $rkk_user_id = $this->Rkk_user_model->add_rkk_user($params);
@@ -46,6 +47,7 @@ class Rkk_user extends CI_Controller{
         else
         {            
             $data['_view'] = 'rkk_user/add';
+			$data['user_perms'] = $this->User_perm_model->get_all_user_perms();
             $this->load->view('templates/head');
 			$this->load->view('templates/menu');
 			$this->load->view('rkk_user/add',$data);
@@ -72,7 +74,7 @@ class Rkk_user extends CI_Controller{
                 $params = array(
 					'user_name' => $this->input->post('user_name'),
 					'user_email' => $this->input->post('user_email'),
-					'user_perm' => $this->input->post('user_perm'),
+					'fk_user_perm' => $this->input->post('user_perm'),
                 );
 
                 $this->Rkk_user_model->update_rkk_user($user_id,$params);            
@@ -80,6 +82,7 @@ class Rkk_user extends CI_Controller{
             }
             else
             {
+				$data['user_perms'] = $this->User_perm_model->get_all_user_perms();
                 $data['_view'] = 'rkk_user/edit';
                 $this->load->view('templates/head');
 				$this->load->view('templates/menu');

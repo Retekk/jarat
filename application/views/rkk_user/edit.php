@@ -18,7 +18,12 @@
 					</div>
 					<div class="form-group">
 						<label>Jogosultság:</label> 
-						<input class="form-control" type="text" name="user_perm" value="<?php echo ($this->input->post('user_perm') ? $this->input->post('user_perm') : $rkk_user['user_perm']); ?>" />
+						<select class="form-control" name="user_perm">
+							<option value="">Válassz!</option>
+							<?php foreach($user_perms as $perm ){ ?>
+							<option value="<?php echo $perm['id']; ?>" <?php echo $this->input->post('fk_user_id') ? $perm['id'] : "selected"; ?>><?php echo $perm['name'];?></option>
+							<?php } ?>
+						</select>
 						<span class="text-danger"><?php echo form_error('user_perm');?></span>
 					</div>
 				</fieldset>

@@ -20,6 +20,9 @@ class Rkk_user_model extends CI_Model
      */
     function get_all_rkk_users()
     {
+		$this->db->select('*');
+		$this->db->select('user_perms.name as perm_name');
+		$this->db->join('user_perms', 'user_perms.id = rkk_users.fk_user_perm');
         $this->db->order_by('user_id', 'desc');
         return $this->db->get('rkk_users')->result_array();
     }
