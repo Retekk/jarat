@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2018. Feb 26. 22:52
+-- Létrehozás ideje: 2018. Feb 28. 22:51
 -- Kiszolgáló verziója: 5.6.26
 -- PHP verzió: 5.6.12
 
@@ -28,9 +28,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `access_log` (
   `id` int(11) NOT NULL,
+  `session_id` varchar(255) NOT NULL,
   `fk_user_id` int(11) NOT NULL,
-  `login_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ip` varchar(45) NOT NULL,
+  `login_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `logout_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Indexek a kiírt táblákhoz
@@ -50,7 +53,7 @@ ALTER TABLE `access_log`
 -- AUTO_INCREMENT a táblához `access_log`
 --
 ALTER TABLE `access_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

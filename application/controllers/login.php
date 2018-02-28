@@ -66,7 +66,32 @@ class Login extends CI_Controller {
 	  $this->db->set('last_login', date("Y-m-d H:i:s"));
 	  $this->db->where('user_id', $user_ID);
 	  $this->db->update('rkk_users');
+	  $this->db->set('login_time', date("Y-m-d H:i:s"));
+	  $this->db->set('fk_user_id', $user_ID);
+	  $this->db->set('ip', $this->get_client_ip_env());
+	  $this->db->set('session_id', session_id());
+	  $this->db->insert('access_log');
   }
+  
+  private function get_client_ip_env() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+        $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+ 
+    return $ipaddress;
+}
   
   private function _check_session() {
     $user = $this->session->userdata('user_id');
