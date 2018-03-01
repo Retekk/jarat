@@ -22,7 +22,7 @@
       </select>
     </div>
     <div class="col-md-2 form-check">
-      <select name="jarat_nev" class="form-control">
+      <select name="beszallito" class="form-control">
         <option value="">-- Beszállító --</option>
         <?php 
         foreach ($beszallitok_select as $value) {
@@ -32,10 +32,24 @@
       </select>
     </div>
     <div class="col-md-3 form-group">
-      <input type="text" class="form-control" placeholder="Beszállító">
+      <select name="kioszto" class="form-control">
+        <option value="">-- Kézbesítő --</option>
+        <?php 
+        foreach ($kezbesitok_select as $value) {
+          echo '<option value="'.$value['id'].'">'.$value['nev'].'</option>';
+        }
+        ?>
+      </select>
     </div>
     <div class="col-md-3 form-group">
-      <input type="text" class="form-control" placeholder="Kiadványnév">
+      <select name="kiadvany" class="form-control">
+        <option value="">-- Kiadvány --</option>
+        <?php 
+        foreach ($kiadvanynev_select as $value) {
+          echo '<option value="'.$value['nev'].'">'.$value['nev'].'</option>';
+        }
+        ?>
+      </select>
     </div>
   </div>
   <div class="row">

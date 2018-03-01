@@ -13,11 +13,44 @@ class Admin extends CI_Controller {
     $data['jaratnev_select'] = $this->getJaratnevForSelect();
     $data['jaratker_select'] = $this->getKeruletForSelect();
     $data['beszallitok_select'] = $this->getBeszallitokForSelect();
-    
+    $data['kezbesitok_select'] = $this->getKezbesitokForSelect();
+    $data['kiadvanynev_select'] = $this->getKiadvanyNevForSelect();
+            
     $this->load->view('templates/head');
     $this->load->view('templates/menu');
     $this->load->view('admin_site', $data);
     $this->load->view('templates/foot');
+  }
+  
+  private function getKiadvanyNevForSelect() {
+    $kiadvanyok = array();
+    $this->db->select('kiadvany');
+    $this->db->from('ujsag');
+    $query = $this->db->get();
+    foreach ($query->result_array() as $row)
+    {
+      if(!in_array($row['kiadvany'], $kiadvanyok)){
+        $kiadvanyok[] = array(
+            'nev' => $row['kiadvany']
+        );
+      }
+    }
+    return $kiadvanyok;
+  }
+  
+  private function getKezbesitokForSelect() {
+    $kezbesitok = array();
+    $this->db->select('sz_id, sz_nev');
+    $this->db->from('kiszall');
+    $query = $this->db->get();
+    foreach ($query->result_array() as $row)
+    {
+      $kezbesitok[] = array(
+          'id' => $row['sz_id'],
+          'nev' => $row['sz_nev']
+      );
+    }
+    return $kezbesitok;
   }
   
   private function getBeszallitokForSelect() {
