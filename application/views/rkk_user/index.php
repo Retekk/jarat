@@ -1,10 +1,11 @@
 <div class="container-fluid">
-	<div class="row">
+	<div class="panel">
+	<div class="row panel-heading">
 		<div class="col-md-12">
 			<h3>Felhasználók</h3>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row panel-body">
 		<div class="col-md-12">
 			<table class="table table-bordered table-striped">
 				<tr>
@@ -25,5 +26,8 @@
 			</table>
 		</div>
 	</div>
-	<a href="<?php echo site_url('rkk_user/add'); ?>" class="btn btn-primary">Új felhasználó</a>
+	<div class="panel-footer">
+		<a href="<?php echo site_url('rkk_user/add'); ?>" class="btn btn-primary">Új felhasználó</a>
+	</div>
+	</div>
 </div>

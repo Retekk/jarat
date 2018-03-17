@@ -61,17 +61,26 @@
       <label>Teljesítés vége</label>
       <input type="date" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Szűrés</button>
    </div>
 </form>
-<?php 
-  $array = json_decode(json_encode($jaratok), true);
-  foreach ($array as $key => $value) {
-  echo $value['jarat_nev_egy'];
-  echo $value['jarat_nev_ketto'];
-  echo $value['kerulet'];
-  
-  ?>
-<br>
-<?php
-}?>
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-bordered table-striped">
+			<tr>
+				<th>Járat név 1</th>
+				<th>Járat név 2</th>
+				<th>Kerület</th>
+			</tr>
+			<?php 
+			$array = json_decode(json_encode($jaratok), true);
+			foreach ($array as $key => $value) { ?>
+			<tr>
+				<td><?php echo $value['jarat_nev_egy']; ?></td>
+				<td><?php echo $value['jarat_nev_ketto']; ?></td>
+				<td><?php echo $value['kerulet']; ?></td>
+			</tr>
+			<?php } ?>
+		</table>
+	</div>
+</div>

@@ -39,53 +39,38 @@ if($success_message !== null){?>
 	<p><?php echo $success_message; ?></p>
 <?php }
 ?></div>
-<div class="flexigrid" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
+<div class="container-fluid">
+<div class="flexigrid panel" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
 	<div id="hidden-operations" class="hidden-operations"></div>
-	<div class="mDiv">
+	<!--<div class="mDiv">
 		<div class="ftitle">
 			&nbsp;
 		</div>
-		<div title="<?php echo $this->l('minimize_maximize');?>" class="ptogtitle">
+		<div title="<?php //echo $this->l('minimize_maximize');?>" class="ptogtitle">
 			<span></span>
 		</div>
-	</div>
+	</div>-->
 	<div id='main-table-box' class="main-table-box">
 
 	<?php if(!$unset_add || !$unset_export || !$unset_print){?>
-	<div class="tDiv">
+	<div class="tDiv panel-heading">
 		<?php if(!$unset_add){?>
 		<div class="tDiv2">
-        	<a href='<?php echo $add_url?>' title='<?php echo $this->l('list_add'); ?> <?php echo $subject?>' class='add-anchor add_button'>
-			<div class="fbutton">
-				<div>
-					<span class="add"><?php echo $this->l('list_add'); ?> <?php echo $subject?></span>
-				</div>
-			</div>
+        	<a href='<?php echo $add_url?>' title='<?php echo $this->l('list_add'); ?> <?php echo $subject?>' class='btn btn-primary'>
+				<span><?php echo $this->l('list_add'); ?> <?php echo $subject?></span>
             </a>
-			<div class="btnseparator">
-			</div>
 		</div>
 		<?php }?>
 		<div class="tDiv3">
 			<?php if(!$unset_export) { ?>
-        	<a class="export-anchor" href="<?php echo $export_url; ?>" download>
-				<div class="fbutton">
-					<div>
-						<span class="export"><?php echo $this->l('list_export');?></span>
-					</div>
-				</div>
+        	<a class="margin-right-20" href="<?php echo $export_url; ?>" download>
+				<span><i class="fa fa-file-excel margin-right-5"></i><?php echo $this->l('list_export');?></span>
             </a>
-			<div class="btnseparator"></div>
 			<?php } ?>
 			<?php if(!$unset_print) { ?>
         	<a class="print-anchor" data-url="<?php echo $print_url; ?>">
-				<div class="fbutton">
-					<div>
-						<span class="print"><?php echo $this->l('list_print');?></span>
-					</div>
-				</div>
+				<span><i class="fa fa-print margin-right-5"></i><?php echo $this->l('list_print');?></span>
             </a>
-			<div class="btnseparator"></div>
 			<?php }?>
 		</div>
 		<div class='clear'></div>
@@ -95,7 +80,7 @@ if($success_message !== null){?>
 	<div id='ajax_list' class="ajax_list">
 		<?php echo $list_view?>
 	</div>
-	<?php echo form_open( $ajax_list_url, 'method="post" id="filtering_form" class="filtering_form" autocomplete = "off" data-ajax-list-info-url="'.$ajax_list_info_url.'"'); ?>
+	<?php echo form_open( $ajax_list_url, 'method="post" id="filtering_form" class="filtering_form panel-footer" autocomplete = "off" data-ajax-list-info-url="'.$ajax_list_info_url.'"'); ?>
 	<div class="sDiv quickSearchBox" id='quickSearchBox'>
 		<div class="sDiv2">
 			<?php echo $this->l('list_search');?>: <input type="text" class="qsbsearch_fieldox search_text" name="search_text" size="30" id='search_text'>
@@ -105,10 +90,10 @@ if($success_message !== null){?>
 				<option value="<?php echo $column->field_name?>"><?php echo $column->display_as?>&nbsp;&nbsp;</option>
 				<?php }?>
 			</select>
-            <input type="button" value="<?php echo $this->l('list_search');?>" class="crud_search" id='crud_search'>
+            <input type="button" value="<?php echo $this->l('list_search');?>" class="btn btn-default crud_search" id='crud_search'>
 		</div>
         <div class='search-div-clear-button'>
-        	<input type="button" value="<?php echo $this->l('list_clear_filtering');?>" id='search_clear' class="search_clear">
+        	<input type="button" value="<?php echo $this->l('list_clear_filtering');?>" id='search_clear' class="search_clear btn btn-default">
         </div>
 	</div>
 	<div class="pDiv">
@@ -131,10 +116,10 @@ if($success_message !== null){?>
 			</div>
 			<div class="pGroup">
 				<div class="pFirst pButton first-button">
-					<span></span>
+					<span class="glyphicon glyphicon-step-backward"></span>
 				</div>
 				<div class="pPrev pButton prev-button">
-					<span></span>
+					<span class="glyphicon glyphicon-backward"></span>
 				</div>
 			</div>
 			<div class="btnseparator">
@@ -148,17 +133,17 @@ if($success_message !== null){?>
 			</div>
 			<div class="pGroup">
 				<div class="pNext pButton next-button" >
-					<span></span>
+					<span class="glyphicon glyphicon-forward"></span>
 				</div>
 				<div class="pLast pButton last-button">
-					<span></span>
+					<span class="glyphicon glyphicon-step-forward"></span>
 				</div>
 			</div>
 			<div class="btnseparator">
 			</div>
 			<div class="pGroup">
 				<div class="pReload pButton ajax_refresh_and_loading" id='ajax_refresh_and_loading'>
-					<span></span>
+					<span class="glyphicon glyphicon-refresh"></span>
 				</div>
 			</div>
 			<div class="btnseparator">
@@ -180,4 +165,5 @@ if($success_message !== null){?>
 	</div>
 	<?php echo form_close(); ?>
 	</div>
+</div>
 </div>

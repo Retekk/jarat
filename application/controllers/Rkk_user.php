@@ -42,6 +42,7 @@ class Rkk_user extends CI_Controller{
             );
             
             $rkk_user_id = $this->Rkk_user_model->add_rkk_user($params);
+			
             redirect('rkk_user/index');
         }
         else

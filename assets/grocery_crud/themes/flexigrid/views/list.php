@@ -3,8 +3,8 @@
 	$column_width = (int)(80/count($columns));
 	
 	if(!empty($list)){
-?><div class="bDiv" >
-		<table cellspacing="0" cellpadding="0" border="0" id="flex1">
+?><div class="bDiv panel-body" >
+		<table class="table table-bordered table-striped" cellspacing="0" cellpadding="0" border="0" id="flex1">
 		<thead>
 			<tr class='hDiv'>
 				<?php foreach($columns as $column){?>
@@ -37,14 +37,14 @@
 				<div class='tools'>				
 					<?php if(!$unset_delete){?>
                     	<a href='<?php echo $row->delete_url?>' title='<?php echo $this->l('list_delete')?> <?php echo $subject?>' class="delete-row" >
-                    			<span class='delete-icon'></span>
+                    			<i class="fa fa-trash right"></i>
                     	</a>
                     <?php }?>
                     <?php if(!$unset_edit){?>
-						<a href='<?php echo $row->edit_url?>' title='<?php echo $this->l('list_edit')?> <?php echo $subject?>' class="edit_button"><span class='edit-icon'></span></a>
+						<a href='<?php echo $row->edit_url?>' title='<?php echo $this->l('list_edit')?> <?php echo $subject?>' class="edit_button"><i class="fa fa-edit margin-right-10 right"></i></a>
 					<?php }?>
 					<?php if(!$unset_read){?>
-						<a href='<?php echo $row->read_url?>' title='<?php echo $this->l('list_view')?> <?php echo $subject?>' class="edit_button"><span class='read-icon'></span></a>
+						<a href='<?php echo $row->read_url?>' title='<?php echo $this->l('list_view')?> <?php echo $subject?>' class="edit_button"><i class="fa fa-search margin-right-10 right"></i></a>
 					<?php }?>
 					<?php 
 					if(!empty($row->action_urls)){

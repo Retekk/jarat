@@ -8,8 +8,9 @@
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/jquery.noty.js');
 	$this->set_js_lib($this->default_javascript_path.'/jquery_plugins/config/jquery.noty.config.js');
 ?>
-<div class="flexigrid crud-form" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
-	<div class="mDiv">
+<div class="container-fluid">
+<div class="flexigrid crud-form panel" style='width: 100%;' data-unique-hash="<?php echo $unique_hash; ?>">
+	<div class="mDiv panel-heading">
 		<div class="ftitle">
 			<div class='ftitle-left'>
 				<?php echo $this->l('form_add'); ?> <?php echo $subject?>
@@ -20,17 +21,16 @@
 			<span></span>
 		</div>
 	</div>
-<div id='main-table-box'>
+<div id='main-table-box' class="panel-body">
 	<?php echo form_open( $insert_url, 'method="post" id="crudForm"  enctype="multipart/form-data"'); ?>
 		<div class='form-div'>
 			<?php
 			$counter = 0;
 				foreach($fields as $field)
 				{
-					$even_odd = $counter % 2 == 0 ? 'odd' : 'even';
 					$counter++;
 			?>
-			<div class='form-field-box <?php echo $even_odd?>' id="<?php echo $field->field_name; ?>_field_box">
+			<div class='form-field-box' id="<?php echo $field->field_name; ?>_field_box">
 				<div class='form-display-as-box' id="<?php echo $field->field_name; ?>_display_as_box">
 					<?php echo $input_fields[$field->field_name]->display_as; ?><?php echo ($input_fields[$field->field_name]->required)? "<span class='required'>*</span> " : ""; ?> :
 				</div>
@@ -54,7 +54,7 @@
 		</div>
 		<div class="pDiv">
 			<div class='form-button-box'>
-				<input id="form-button-save" type='submit' value='<?php echo $this->l('form_save'); ?>'  class="btn btn-large"/>
+				<input id="form-button-save" type='submit' value='<?php echo $this->l('form_save'); ?>'  class="btn btn-large btn-primary"/>
 			</div>
 <?php 	if(!$this->unset_back_to_list) { ?>
 			<div class='form-button-box'>
@@ -70,6 +70,7 @@
 			<div class='clear'></div>
 		</div>
 	<?php echo form_close(); ?>
+</div>
 </div>
 </div>
 <script>

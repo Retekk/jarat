@@ -27,5 +27,5 @@
 					<li><a href="/kiszall">Kiszállítók</a></li>
 				</ul>
 			</div>
-			<div class="col-md-10"> 
+			<div class="col-md-10 content"> 
 			<!--ide jön a content-->
