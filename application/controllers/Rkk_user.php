@@ -15,10 +15,11 @@ class Rkk_user extends CI_Controller{
     function index()
     {
         $data['rkk_users'] = $this->Rkk_user_model->get_all_rkk_users();
+		$data['user_perm'] = $this->session->userdata('user_perm');
 		       
         $data['_view'] = 'rkk_user/index';
 		$this->load->view('templates/head');
-		$this->load->view('templates/menu');
+		$this->load->view('templates/menu', $data);
         $this->load->view('rkk_user/index',$data);
 		$this->load->view('templates/foot');
     }
@@ -49,8 +50,9 @@ class Rkk_user extends CI_Controller{
         {            
             $data['_view'] = 'rkk_user/add';
 			$data['user_perms'] = $this->User_perm_model->get_all_user_perms();
+			$data['user_perm'] = $this->session->userdata('user_perm');
             $this->load->view('templates/head');
-			$this->load->view('templates/menu');
+			$this->load->view('templates/menu', $data);
 			$this->load->view('rkk_user/add',$data);
 			$this->load->view('templates/foot');
         }
@@ -84,9 +86,10 @@ class Rkk_user extends CI_Controller{
             else
             {
 				$data['user_perms'] = $this->User_perm_model->get_all_user_perms();
+				$data['user_perm'] = $this->session->userdata('user_perm');
                 $data['_view'] = 'rkk_user/edit';
                 $this->load->view('templates/head');
-				$this->load->view('templates/menu');
+				$this->load->view('templates/menu', $data);
 				$this->load->view('rkk_user/edit',$data);
 				$this->load->view('templates/foot');
             }
@@ -114,9 +117,13 @@ class Rkk_user extends CI_Controller{
 	
 	private function _check_session() {
     $user = $this->session->userdata('user_id');
+	$user_perm = $this->session->userdata('user_perm');
     if(!$user) {
-      redirect('login');
+      redirect('login');  
     }
+	if($user_perm != "1"){
+		redirect('not_authorized');
+	}
   }
     
 }

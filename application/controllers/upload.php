@@ -87,9 +87,13 @@ class Upload extends CI_Controller {
   
   private function _check_session() {
     $user = $this->session->userdata('user_id');
+	$user_perm = $this->session->userdata('user_perm');
     if(!$user) {
-      redirect('login');
+      redirect('login');  
     }
+	if($user_perm != "1"){
+		redirect('not_authorized');
+	}
   }
   
 }

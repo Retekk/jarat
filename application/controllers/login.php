@@ -24,11 +24,13 @@ class Login extends CI_Controller {
       
       if($this->_resolve_user_login($user_post, $pass_post)) {
         $user_ID = $this->_get_user_ID_from_username($user_post);
+        $user_perm = $this->_get_user_perm_from_username($user_post);
 		$this->_store_login_date($user_ID);
         $ip_address = $this->input->ip_address();
         
         $create_session = array(
             'user_id' => $user_ID,
+			'user_perm' => $user_perm,
             'ip_address' => $ip_address
         );
         $this->session->set_userdata($create_session);
@@ -56,6 +58,13 @@ class Login extends CI_Controller {
     $this->db->from('rkk_users');
     $this->db->where('user_name', $username);
     return $this->db->get()->row('user_id');
+  }
+  
+  private function _get_user_perm_from_username($username) {
+    $this->db->select('fk_user_perm');
+    $this->db->from('rkk_users');
+    $this->db->where('user_name', $username);
+    return $this->db->get()->row('fk_user_perm');
   }
   
   private function _verify_password_hash($pass, $hash) {

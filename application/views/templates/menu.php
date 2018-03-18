@@ -19,12 +19,14 @@
 		<div class="row">
 			<div id="main-menu-container" class="col-md-2">
 				<ul class="menu">
-					<li><a href="/admin">Főoldal</a></li>
+					<li><a href="/admin"><?php echo ($user_perm == '1')?"Főoldal":"Járataim"?></a></li>
+					<?php if($user_perm == '1'){?>
 					<li><a href="/rkk_user">Felhasználók kezelése</a></li>
 					<li><a href="/xls">Excel feltöltés</a></li>
-          <li><a href="/jaratok">Járatok</a></li>
+					<li><a href="/jaratok">Járatok</a></li>
 					<li><a href="/beszall">Beszállítók</a></li>
 					<li><a href="/kiszall">Kiszállítók</a></li>
+					<?php } ?>
 				</ul>
 			</div>
 			<div class="col-md-10 content"> 

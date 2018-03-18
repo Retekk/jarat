@@ -17,10 +17,10 @@ class Xls extends CI_Controller {
     {
       $data['beszallitok'][] = $row->b_nev;
     }
-    
+    $data['user_perm'] = $this->session->userdata('user_perm');
     
     $this->load->view('templates/head');
-    $this->load->view('templates/menu');
+    $this->load->view('templates/menu', $data);
     $this->load->view('xls_site', $data);
     $this->load->view('templates/foot');
   }
@@ -32,13 +32,14 @@ class Xls extends CI_Controller {
     );
     
     $this->form_validation->set_rules($validation);
+	$data['user_perm'] = $this->session->userdata('user_perm');
     
     if($this->form_validation->run() == true) {
       
       $file = $this->input->post('xls');
       
       $this->load->view('templates/head');
-      $this->load->view('templates/menu');
+      $this->load->view('templates/menu', $data);
       $this->load->view('success_upload');
       $this->load->view('templates/foot');
       
@@ -48,9 +49,13 @@ class Xls extends CI_Controller {
   
   private function _check_session() {
     $user = $this->session->userdata('user_id');
+	$user_perm = $this->session->userdata('user_perm');
     if(!$user) {
-      redirect('login');
+      redirect('login');  
     }
+	if($user_perm != "1"){
+		redirect('not_authorized');
+	}
   }
   
 }

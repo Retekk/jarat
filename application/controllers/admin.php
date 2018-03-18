@@ -15,9 +15,10 @@ class Admin extends CI_Controller {
     $data['beszallitok_select'] = $this->getBeszallitokForSelect();
     $data['kezbesitok_select'] = $this->getKezbesitokForSelect();
     $data['kiadvanynev_select'] = $this->getKiadvanyNevForSelect();
+	$data['user_perm'] = $this->session->userdata('user_perm');
             
     $this->load->view('templates/head');
-    $this->load->view('templates/menu');
+    $this->load->view('templates/menu', $data);
     $this->load->view('admin_site', $data);
     $this->load->view('templates/foot');
   }
@@ -122,6 +123,7 @@ class Admin extends CI_Controller {
   
   function logout() {
     $this->session->unset_userdata('user_id');
+    $this->session->unset_userdata('user_perm');
     $this->session->unset_userdata('ip_address');
     $this->session->sess_destroy();
     redirect('login');

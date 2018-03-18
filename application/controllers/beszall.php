@@ -15,9 +15,10 @@ class beszall extends CI_Controller {
     $crud->set_table('beszall');
     $crud->columns('b_nev')->display_as('b_nev','Név');
     $output = $crud->render();
-    
+	$data = array();
+    $data['user_perm'] = $this->session->userdata('user_perm');
     $this->load->view('templates/head', $output);
-    $this->load->view('templates/menu');
+    $this->load->view('templates/menu', $data);
     $this->load->view('beszallitok', $output);
     $this->load->view('templates/foot');
   }
@@ -31,9 +32,13 @@ class beszall extends CI_Controller {
   
   private function _check_session() {
     $user = $this->session->userdata('user_id');
+	$user_perm = $this->session->userdata('user_perm');
     if(!$user) {
-      redirect('login');
+      redirect('login');  
     }
+	if($user_perm != "1"){
+		redirect('not_authorized');
+	}
   }
   
 }
