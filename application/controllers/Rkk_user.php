@@ -43,6 +43,8 @@ class Rkk_user extends CI_Controller{
             );
             
             $rkk_user_id = $this->Rkk_user_model->add_rkk_user($params);
+			$msg = "Belépés az oldalra: ".$config['base_url']."\nJelszó: ".$params['user_pass'];
+			mail($params['user_email'],"Belépés",$msg);
 			
             redirect('rkk_user/index');
         }
