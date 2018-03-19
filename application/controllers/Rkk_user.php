@@ -16,6 +16,7 @@ class Rkk_user extends CI_Controller{
     {
         $data['rkk_users'] = $this->Rkk_user_model->get_all_rkk_users();
 		$data['user_perm'] = $this->session->userdata('user_perm');
+		$data['user_id'] = $this->session->userdata('user_id');
 		       
         $data['_view'] = 'rkk_user/index';
 		$this->load->view('templates/head');

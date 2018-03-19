@@ -18,8 +18,8 @@
 					<td><?php echo $r['user_name']; ?></td>
 					<td><?php echo $r['perm_name']; ?></td>
 					<td>
-						<a href="<?php echo site_url('rkk_user/edit/'.$r['user_id']); ?>">Szerkesztés</a> | 
-						<a href="<?php echo site_url('rkk_user/remove/'.$r['user_id']); ?>">Törlés</a>
+						<a href="<?php echo site_url('rkk_user/edit/'.$r['user_id']); ?>">Szerkesztés</a>
+						<?php if ($r['user_id'] != $user_id) {?> | <a href="<?php echo site_url('rkk_user/remove/'.$r['user_id']); ?>">Törlés</a><?php } ?>
 					</td>
 				</tr>
 				<?php } ?>
