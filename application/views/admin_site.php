@@ -55,11 +55,11 @@
   <div class="row">
     <div class="col-md-2 form-check">
       <label>Teljesítés kezdete</label>
-      <input type="date" class="form-control">
+      <input type="date" class="form-control" name="from">
     </div>
     <div class="col-md-2 form-check">
       <label>Teljesítés vége</label>
-      <input type="date" class="form-control">
+      <input type="date" class="form-control" name="to">
     </div>
     <button type="submit" class="btn btn-primary">Szűrés</button>
    </div>
@@ -67,19 +67,41 @@
 <div class="row">
 	<div class="col-md-12">
 		<table class="table table-bordered table-striped">
-			<tr>
-				<th>Járat név 1</th>
-				<th>Járat név 2</th>
-				<th>Kerület</th>
-			</tr>
-			<?php 
-			$array = json_decode(json_encode($jaratok), true);
-			foreach ($array as $key => $value) { ?>
-			<tr>
-				<td><?php echo $value['jarat_nev_egy']; ?></td>
-				<td><?php echo $value['jarat_nev_ketto']; ?></td>
-				<td><?php echo $value['kerulet']; ?></td>
-			</tr>
+        <tr>
+          <td>Kiadvány</td>
+          <td>Beszállító</td>
+          <td>Gyűjtő</td>
+          <td>Kiszállító</td>
+          <?php 
+            $array = json_decode(json_encode($jaratok), true);
+            foreach ($array as $key => $value) { ?>
+              <td>
+                <?php echo $value['jarat_nev_egy']; ?><br/>
+                <?php echo $value['jarat_nev_ketto']; ?><br/>
+                <?php echo $value['kerulet']; ?><br/>
+              </td>
+          <?php } ?>
+        </tr>
+      <?php
+        $array = json_decode(json_encode($ujsagok), true);
+        foreach ($array as $key => $value) { ?>
+        <tr>
+          <td><?php echo $value['beszalito']; ?></td>
+          <td><?php echo $value['kiadvany']; ?></td>
+          <td><?php echo $value['gyujto']; ?></td>
+          <td>Kiszállító</td>
+          <?php 
+            $arrayJarat = json_decode(json_encode($jaratok), true);
+            $arrayJaratUjsag = json_decode(json_encode($ujsagJarat), true);
+            foreach ($arrayJarat as $keyJarat => $valueJarat) { 
+              $jaratId = intval($valueJarat['id']);
+              $ujsagId = intval($value['id']);
+              ?>
+              <td>
+                <?php// echo $arrayJaratUjsag[$ujsagId][$jaratId]; ?>
+              </td>
+          <?php } ?>
+        </tr>
 			<?php } ?>
 		</table>
 	</div>
