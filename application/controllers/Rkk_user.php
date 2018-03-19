@@ -117,6 +117,22 @@ class Rkk_user extends CI_Controller{
             show_error('The rkk_user you are trying to delete does not exist.');
     }
 	
+	function checkmail(){
+		$email = $this->input->post('user_email');
+		$rkk_user = $this->Rkk_user_model->get_rkk_user_by_mail($email);
+		if($rkk_user != ""){
+			echo('EMAIL_EXISTS');
+		}
+	}
+	
+	function checkuser(){
+		$name = $this->input->post('user_name');
+		$rkk_user = $this->Rkk_user_model->get_rkk_user_by_name($name);
+		if($rkk_user != ""){
+			echo('USER_EXISTS');
+		}
+	}
+	
 	private function _check_session() {
     $user = $this->session->userdata('user_id');
 	$user_perm = $this->session->userdata('user_perm');

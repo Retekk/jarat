@@ -14,6 +14,14 @@ class Rkk_user_model extends CI_Model
     {
         return $this->db->get_where('rkk_users',array('user_id'=>$user_id))->row_array();
     }
+	
+	function get_rkk_user_by_mail($email) {
+		return $this->db->get_where('rkk_users',array('user_email'=>$email))->row_array();
+	}
+	
+	function get_rkk_user_by_name($name) {
+		return $this->db->get_where('rkk_users',array('user_name'=>$name))->row_array();
+	}		
         
     /*
      * Get all rkk_users
