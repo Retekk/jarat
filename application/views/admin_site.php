@@ -83,24 +83,14 @@
           <?php } ?>
         </tr>
       <?php
-        $array = json_decode(json_encode($ujsagok), true);
+        $array = json_decode(json_encode($ujsagJarat), true);
         foreach ($array as $key => $value) { ?>
         <tr>
           <td><?php echo $value['beszalito']; ?></td>
           <td><?php echo $value['kiadvany']; ?></td>
           <td><?php echo $value['gyujto']; ?></td>
           <td>Kiszállító</td>
-          <?php 
-            $arrayJarat = json_decode(json_encode($jaratok), true);
-            $arrayJaratUjsag = json_decode(json_encode($ujsagJarat), true);
-            foreach ($arrayJarat as $keyJarat => $valueJarat) { 
-              $jaratId = intval($valueJarat['id']);
-              $ujsagId = intval($value['id']);
-              ?>
-              <td>
-                <?php// echo $arrayJaratUjsag[$ujsagId][$jaratId]; ?>
-              </td>
-          <?php } ?>
+          <td><?php echo $value['u_db']; ?></td>
         </tr>
 			<?php } ?>
 		</table>

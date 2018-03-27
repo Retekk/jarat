@@ -34,7 +34,7 @@
 					</fieldset>
 					<fieldset>
 						<button class="btn btn-primary" type="submit">Létrehoz</button>
-						<a href="/rkk_user" class="btn btn-default" type="submit">Mégse</a>
+						<a href="/rkk_user" class="btn btn-default">Mégse</a>
 					</fieldset>
 					<?php echo form_close(); ?>
 				</div>

@@ -11,7 +11,7 @@ class Admin extends CI_Controller {
     $data = array();
     $data['jaratok'] = $this->getJarat($this->input->get('jarat_nev'),$this->input->get('jarat_kerulet'));
     $data['ujsagok'] = $this->getUjsag($this->input->get('kiadvany'),$this->input->get('from'),$this->input->get('to'));
-    $data['ujsagJarat'] = $this->getUjsagJarat($data['ujsagok'],$data['jaratok']);
+    $data['ujsagJarat'] = $this->getUjsagJarat(/*$data['ujsagok'],$data['jaratok']*/);
     $data['jaratnev_select'] = $this->getJaratnevForSelect();
     $data['jaratker_select'] = $this->getKeruletForSelect();
     $data['beszallitok_select'] = $this->getBeszallitokForSelect();
@@ -150,7 +150,7 @@ class Admin extends CI_Controller {
     return $ujsagok;
   }
   
-  private function getUjsagJarat($ujsagok, $jaratok) {
+  /*private function getUjsagJarat($ujsagok, $jaratok) {
     $ujsagJarat = array();
     $ujsagId = array();
     $jaratId = array();
@@ -171,6 +171,14 @@ class Admin extends CI_Controller {
       $ujsagJarat[$row['u_id']][$row['j_id']] = $row['db'];
     }
     return $ujsagJarat;
+  }*/
+  
+  private function getUjsagJarat(){
+	$sql = "SELECT `jarat`.*, `ujsag`.*, `ujsag_jarat`.`db` as `u_db` FROM `ujsag_jarat` JOIN `jarat` ON `jarat`.`id` = `ujsag_jarat`.`j_id` JOIN `ujsag` ON `ujsag`.`id` = `ujsag_jarat`.`u_id`";
+	$result = $this->db->query($sql)->result_array();
+
+
+	return $result;
   }
   
   function logout() {
