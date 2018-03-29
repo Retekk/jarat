@@ -174,10 +174,12 @@ class Admin extends CI_Controller {
   }*/
   
   private function getUjsagJarat(){
-	$sql = "SELECT `jarat`.*, `ujsag`.*, `ujsag_jarat`.`db` as `u_db` FROM `ujsag_jarat` JOIN `jarat` ON `jarat`.`id` = `ujsag_jarat`.`j_id` JOIN `ujsag` ON `ujsag`.`id` = `ujsag_jarat`.`u_id`";
+	$sql = "SELECT `rkk_users`.*, `jarat`.*, `ujsag`.*, `ujsag_jarat`.`db` as `u_db` 
+			FROM `ujsag_jarat` 
+			JOIN `jarat` ON `jarat`.`id` = `ujsag_jarat`.`j_id` 
+			JOIN `ujsag` ON `ujsag`.`id` = `ujsag_jarat`.`u_id`
+			JOIN `rkk_users` ON `rkk_users`.`user_id` = `ujsag_jarat`.`usr_id`";
 	$result = $this->db->query($sql)->result_array();
-
-
 	return $result;
   }
   

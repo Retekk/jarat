@@ -71,25 +71,21 @@
           <td>Kiadvány</td>
           <td>Beszállító</td>
           <td>Gyűjtő</td>
-          <td>Kiszállító</td>
-          <?php 
-            $array = json_decode(json_encode($jaratok), true);
-            foreach ($array as $key => $value) { ?>
-              <td>
-                <?php echo $value['jarat_nev_egy']; ?><br/>
-                <?php echo $value['jarat_nev_ketto']; ?><br/>
-                <?php echo $value['kerulet']; ?><br/>
-              </td>
-          <?php } ?>
+          <td>Kézbesítő</td>
+		  <td>Járat</td>
+		  <td>Kerület</td>
+		  <td>Db</td>
         </tr>
       <?php
         $array = json_decode(json_encode($ujsagJarat), true);
         foreach ($array as $key => $value) { ?>
         <tr>
-          <td><?php echo $value['beszalito']; ?></td>
           <td><?php echo $value['kiadvany']; ?></td>
+          <td><?php echo $value['beszalito']; ?></td>
           <td><?php echo $value['gyujto']; ?></td>
-          <td>Kiszállító</td>
+          <td><?php echo $value['user_name']; ?></td>
+		  <td><?php echo ($value['jarat_nev_egy']?$value['jarat_nev_egy']:$value['jarat_nev_ketto']);?></td>
+		  <td><?php echo $value['kerulet']; ?></td>
           <td><?php echo $value['u_db']; ?></td>
         </tr>
 			<?php } ?>
