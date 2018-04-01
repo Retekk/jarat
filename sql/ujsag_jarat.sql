@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2018. Ápr 01. 18:08
+-- Létrehozás ideje: 2018. Ápr 01. 18:06
 -- Kiszolgáló verziója: 5.6.26
 -- PHP verzió: 5.6.12
 
@@ -23,30 +23,34 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `user_perms`
+-- Tábla szerkezet ehhez a táblához `ujsag_jarat`
 --
 
-CREATE TABLE IF NOT EXISTS `user_perms` (
+CREATE TABLE IF NOT EXISTS `ujsag_jarat` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `usr_id` int(11) NOT NULL,
+  `u_id` int(11) NOT NULL,
+  `j_id` int(11) NOT NULL,
+  `db` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `user_perms`
+-- A tábla adatainak kiíratása `ujsag_jarat`
 --
 
-INSERT INTO `user_perms` (`id`, `name`) VALUES
-(1, 'Admin'),
-(2, 'Kézbesítő');
+INSERT INTO `ujsag_jarat` (`id`, `usr_id`, `u_id`, `j_id`, `db`) VALUES
+(1, 667, 1, 6, 1),
+(3, 667, 2, 6, 10),
+(4, 669, 3, 7, 23);
 
 --
 -- Indexek a kiírt táblákhoz
 --
 
 --
--- A tábla indexei `user_perms`
+-- A tábla indexei `ujsag_jarat`
 --
-ALTER TABLE `user_perms`
+ALTER TABLE `ujsag_jarat`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54,10 +58,10 @@ ALTER TABLE `user_perms`
 --
 
 --
--- AUTO_INCREMENT a táblához `user_perms`
+-- AUTO_INCREMENT a táblához `ujsag_jarat`
 --
-ALTER TABLE `user_perms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+ALTER TABLE `ujsag_jarat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

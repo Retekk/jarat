@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.4.14
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2018. Feb 15. 23:38
--- Kiszolgáló verziója: 10.1.13-MariaDB
--- PHP verzió: 5.6.23
+-- Létrehozás ideje: 2018. Ápr 01. 18:08
+-- Kiszolgáló verziója: 5.6.26
+-- PHP verzió: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Tábla szerkezet ehhez a táblához `jarat`
 --
 
-CREATE TABLE `jarat` (
+CREATE TABLE IF NOT EXISTS `jarat` (
   `id` int(11) NOT NULL,
   `jarat_nev_egy` varchar(250) NOT NULL,
   `jarat_nev_ketto` varchar(250) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `jarat` (
   `munka` varchar(250) NOT NULL,
   `db` int(11) NOT NULL,
   `terjesztesi_cel` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8;
 
 --
 -- A tábla adatainak kiíratása `jarat`
@@ -194,7 +194,7 @@ ALTER TABLE `jarat`
 -- AUTO_INCREMENT a táblához `jarat`
 --
 ALTER TABLE `jarat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=139;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -4,18 +4,24 @@ class Admin extends CI_Controller {
   
   public function __construct() {
     parent::__construct();
+	$this->load->model('Rkk_user_model');
     $this->_check_session();
   }
   
   public function index() {
     $data = array();
-    $data['jaratok'] = $this->getJarat($this->input->get('jarat_nev'),$this->input->get('jarat_kerulet'));
+	$filter = array();
+	
+	$filter['jarat_nev'] = $this->input->get('jarat_nev');
+	$filter['kerulet'] = $this->input->get('jarat_kerulet');
+	$filter['kezbesito'] =$this->input->get('kezbesito');
+	
     $data['ujsagok'] = $this->getUjsag($this->input->get('kiadvany'),$this->input->get('from'),$this->input->get('to'));
-    $data['ujsagJarat'] = $this->getUjsagJarat(/*$data['ujsagok'],$data['jaratok']*/);
+    $data['ujsagJarat'] = $this->getUjsagJarat($filter);
     $data['jaratnev_select'] = $this->getJaratnevForSelect();
     $data['jaratker_select'] = $this->getKeruletForSelect();
     $data['beszallitok_select'] = $this->getBeszallitokForSelect();
-    $data['kezbesitok_select'] = $this->getKezbesitokForSelect();
+    $data['kezbesitok_select'] = $this->Rkk_user_model->get_rkk_user_by_perm('2');
     $data['kiadvanynev_select'] = $this->getKiadvanyNevForSelect();
     $data['user_perm'] = $this->session->userdata('user_perm');
             
@@ -39,21 +45,6 @@ class Admin extends CI_Controller {
       }
     }
     return $kiadvanyok;
-  }
-  
-  private function getKezbesitokForSelect() {
-    $kezbesitok = array();
-    $this->db->select('sz_id, sz_nev');
-    $this->db->from('kiszall');
-    $query = $this->db->get();
-    foreach ($query->result_array() as $row)
-    {
-      $kezbesitok[] = array(
-          'id' => $row['sz_id'],
-          'nev' => $row['sz_nev']
-      );
-    }
-    return $kezbesitok;
   }
   
   private function getBeszallitokForSelect() {
@@ -150,35 +141,30 @@ class Admin extends CI_Controller {
     return $ujsagok;
   }
   
-  /*private function getUjsagJarat($ujsagok, $jaratok) {
-    $ujsagJarat = array();
-    $ujsagId = array();
-    $jaratId = array();
-    foreach($ujsagok as $key => $value) {
-      $ujsagId[] = $value['id'];
-    }
-    foreach($jaratok as $key => $value) {
-      $jaratId[] = $value['id'];
-    }
-    $this->db->select('u_id, j_id, db');
-    $this->db->from('ujsag_jarat');
-    $this->db->where_in('u_id', $ujsagId);
-    $this->db->where_in('j_id', $jaratId);
-    
-    $query = $this->db->get();
-    foreach ($query->result_array() as $row)
-    {
-      $ujsagJarat[$row['u_id']][$row['j_id']] = $row['db'];
-    }
-    return $ujsagJarat;
-  }*/
-  
-  private function getUjsagJarat(){
+  private function getUjsagJarat($filter){
 	$sql = "SELECT `rkk_users`.*, `jarat`.*, `ujsag`.*, `ujsag_jarat`.`db` as `u_db` 
 			FROM `ujsag_jarat` 
 			JOIN `jarat` ON `jarat`.`id` = `ujsag_jarat`.`j_id` 
 			JOIN `ujsag` ON `ujsag`.`id` = `ujsag_jarat`.`u_id`
 			JOIN `rkk_users` ON `rkk_users`.`user_id` = `ujsag_jarat`.`usr_id`";
+	
+	$first_filter = true;
+	if($filter['jarat_nev']){
+		$sql .= ($first_filter ? "WHERE" : "AND");
+		$sql .= "(`jarat`.`jarat_nev_egy` LIKE '".$filter['jarat_nev']."' OR "."`jarat`.`jarat_nev_ketto` LIKE '".$filter['jarat_nev']."')";
+		$first_filter = false;
+	}
+	if($filter['kerulet']){
+		$sql .= ($first_filter ? "WHERE" : "AND");
+		$sql .= "`jarat`.`kerulet` LIKE '".$filter['kerulet']."'";
+		$first_filter = false;
+	}
+	if($filter['kezbesito']){
+		$sql .= ($first_filter ? "WHERE" : "AND");
+		$sql .= "`ujsag_jarat`.`usr_id` = '".$filter['kezbesito']."'";
+		$first_filter = false;
+	}
+	//var_dump($sql);
 	$result = $this->db->query($sql)->result_array();
 	return $result;
   }

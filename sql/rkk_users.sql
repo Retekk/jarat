@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2018. Feb 26. 22:52
+-- Létrehozás ideje: 2018. Ápr 01. 18:08
 -- Kiszolgáló verziója: 5.6.26
 -- PHP verzió: 5.6.12
 
@@ -33,15 +33,18 @@ CREATE TABLE IF NOT EXISTS `rkk_users` (
   `user_pass` varchar(255) NOT NULL,
   `fk_user_perm` int(2) NOT NULL DEFAULT '2',
   `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=668 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=671 DEFAULT CHARSET=utf8;
 
 --
 -- A tábla adatainak kiíratása `rkk_users`
 --
 
 INSERT INTO `rkk_users` (`user_id`, `user_name`, `user_email`, `user_pass`, `fk_user_perm`, `last_login`) VALUES
-(2, 'miki', 'mikidosa@gmail.com', '$2y$10$xHmZQbltk8HvYqkJ8YxapOh0SfcmAKExYyhh8XJiagCHBS4ehey/.', 1, '2018-02-26 21:47:23'),
-(666, 'fakanal', 'a@a.hu', '$2y$10$9/gwxBDNmRLVZTLNmA8qauNeQ0N7MkYR7kYVMTifox2OYduPmI3CO', 1, '2018-02-26 21:29:38');
+(2, 'miki', 'mikidosa@g', '$2y$10$xHmZQbltk8HvYqkJ8YxapOh0SfcmAKExYyhh8XJiagCHBS4ehey/.', 1, '2018-04-01 13:21:09'),
+(666, 'fakanal', 'a@a.hu', '$2y$10$9/gwxBDNmRLVZTLNmA8qauNeQ0N7MkYR7kYVMTifox2OYduPmI3CO', 1, '2018-02-26 21:29:38'),
+(667, 'kezbesito', 'b@b.hu', '$2y$10$wfJdROp2ndmBf9lnRLP.reOv/sxHYKDDrXMpbjw.bEApK3ZqibY5O', 2, '2018-03-18 16:40:33'),
+(669, 'uj', 'mikidosa@gmail.com', '$2y$10$7pFz2W5FhrRlPD91k3WvjOWoBPJLW0Lqxla3jE/xIU//9oO0vlIo6', 2, '2018-03-19 19:26:53'),
+(670, 'miki', '', '$2y$10$ieeSQQH07jLT8nb1AOwh.e7s8.9UarDWlUogVi/8HtSUhWhs2gHGa', 0, '2018-03-19 19:52:58');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -62,7 +65,7 @@ ALTER TABLE `rkk_users`
 -- AUTO_INCREMENT a táblához `rkk_users`
 --
 ALTER TABLE `rkk_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=668;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=671;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

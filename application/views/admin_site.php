@@ -32,11 +32,11 @@
       </select>
     </div>
     <div class="col-md-3 form-group">
-      <select name="kioszto" class="form-control">
+      <select name="kezbesito" class="form-control">
         <option value="">-- Kézbesítő --</option>
         <?php 
         foreach ($kezbesitok_select as $value) {
-          echo '<option value="'.$value['id'].'">'.$value['nev'].'</option>';
+          echo '<option value="'.$value['user_id'].'">'.$value['user_name'].'</option>';
         }
         ?>
       </select>
